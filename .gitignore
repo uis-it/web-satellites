@@ -1,0 +1,7 @@
+.svn
+*~
+.settings
+/application/configs/application.ini
+/.buildpath
+/.project
+/.zfproject.xml
