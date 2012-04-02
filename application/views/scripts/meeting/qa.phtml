@@ -1,0 +1,151 @@
+<?php
+	$theMeeting = $this->currentMeeting;
+	Zend_Debug::dump($theMeeting->description); 
+?>
+
+<style type="text/css" media="all">
+
+
+#topQA{
+}/* Header */
+
+#splitterContainer {/* Main splitter element */
+	height:400px;
+	width:100%;
+	margin:0;
+	padding:0;
+}
+#leftPane{
+	float:left;
+	width:15%;
+	height:400px;
+	border-top:solid 1px #EEEDE3;
+	background:#EEEDE3;
+	overflow: auto;
+}
+#rightPane{	
+	/*Contains toolbar and horizontal splitter*/
+	float:right;
+	width:85%;
+	height:100%;
+	background:#f4f4f4;
+}
+#rightSplitterContainer{/*horizontal splitter*/	
+	width:100%;
+	background:#FFFFFF;
+	border-top:solid 1px #9cbdff;
+} 
+
+#rightTopPane{/*Top nested in horizontal splitter */
+	width:100%;
+	height:100%;
+	overflow:auto;
+	background:#f4f4f4;
+}
+#rightBottomPane{/*Bottom nested in horizontal splitter */
+	background:#f4f4f4;
+	width:100%;
+	overflow:auto;
+}
+/* Splitbar styles; these are the default class names and required styles */
+.splitbarV {
+float:left;width:6px;height:100%;
+line-height:0px;font-size:0px;
+border-left:solid 1px #EEEDE3;
+border-right:solid 1px #EEEDE3;
+background:#cbe1fb url(/images/splitter/panev.gif) 0% 50%;
+}
+.splitbarH {
+height:6px;text-align:left;line-height:0px;font-size:0px;
+border-top:solid 1px #9cbdff;border-bottom:solid 1px #9cbdff;
+background:#cbe1fb url(/images/splitter/paneh.gif) 50% 0%;
+}
+
+.splitbuttonV{
+margin-top:-41px;margin-left:-4px;top:50%;position:relative;
+height:83px;width:10px;
+background:transparent url(/images/splitter/panevc.gif) 10px 50%;
+}
+.splitbuttonV.invert{
+margin-left:0px;background:transparent url(/images/splitter/panevc.gif) 0px 50%;
+}
+.splitbuttonH{
+margin-left:-41px;left:50%;position:relative;
+height:10px !important;width:83px;
+background:transparent url(/images/splitter/panehc.gif) 50% 0px;
+}
+.splitbuttonH.invert{
+margin-top:-4px;background:transparent url(/images/splitter/panehc.gif) 50% -10px;
+}
+.splitbarV.working,.splitbarH.working,.splitbuttonV.working,.splitbuttonH.working{
+ -moz-opacity:.50; filter:alpha(opacity=50); opacity:.50;
+}
+</style>
+<script type="text/javascript">
+
+jQuery(function(){
+	Meeting.init(<?php echo $this->currentMeeting->id ;?>);
+	jQuery("#splitterContainer").splitter(
+			{
+				minAsize:0
+				,maxAsize:600
+				,splitVertical:true
+				,A:jQuery('#leftPane')
+				,B:jQuery('#rightPane')
+				,slave:jQuery("#rightSplitterContainer")
+				,closeableto:0
+			}
+	);
+	Meeting.refreshQuestionsPannel(true);
+});
+</script>
+  
+<script id="blockQuestion" type="text/html">
+	<div>
+		<div class="question" data="{id:${id}}" id="question_25">
+			${alias}  (${dateCreated}):<br>
+			title: ${title}<br>  
+			${content} 
+		</div>
+		<div class="navQuestion" data="{id:${id}}">
+			<a class="captureTrigger" data="{id:${id}}" href="javascript:void(0);">[capture]</a>
+			<a class="releaseTrigger" data="{id:${id}}" href="javascript:void(0);">[release]</a>
+			<a class="editTrigger" data="{id:${id}}" href="javascript:void(0);">[edit]</a>
+			<a class="publishTrigger" data="{id:${id}}" href="javascript:void(0);">[publish]</a>
+			<a class="unpublishTrigger" data="{id:${id}}" href="javascript:void(0);">[unpublish]</a>
+			<a class="acceptTrigger" data="{id:${id}}" href="javascript:void(0);">[accept]</a>
+			<a class="rejectTrigger" data="{id:${id}}" href="javascript:void(0);">[reject]</a>
+		</div>
+	</div>
+</script>
+
+
+
+<div id="topQA">
+jQuery splitter demo- download all demo files <a href="splitter.zip">here</a>
+</div>
+
+<div id="splitterContainer">
+	<div id="leftPane">
+		
+	</div>
+	<div id="rightPane">
+		<h2>Edit question</h2>
+		<div id="question-content">
+			<p><label>Content:</label></p>
+			<textarea cols="70" rows="7" id="questionContent"></textarea>
+		</div>
+		<div id="question-alias">
+			<label>Alias:</label><span id="questionAlias"></span>
+		</div>
+		<div id="question-date">
+			<label>Date:</label><span id="questionDate"></span>
+		</div>
+		<div id="answet-content">
+			<p><label>Answer:</label></p>
+			<textarea cols="70" rows="7" id="answerContent"></textarea>
+		</div>
+		<input type="button" id="saveTrigger" value="Save"/>
+	</div>
+</div>
+<!-- #splitterContainer -->

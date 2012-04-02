@@ -1,0 +1,6 @@
+<?php if($this->identity == null) { ?>
+    To log in <a href='/user/login'>click here</a>
+<?php }else{ ?>
+    Welcome back <?php echo $this->identity->_fullname;?><br>
+    To log out <a href='/user/logout'>click here</a>
+<?php } ?>

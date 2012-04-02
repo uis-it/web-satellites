@@ -1,0 +1,10 @@
+<?php
+echo '<ul>';
+foreach ($this->topMenu as $menuItem) {
+	echo '
+		<li>
+			<a href="'. $menuItem['url'] .'">'.$menuItem['txt'].'</a>
+		</li>
+	'; 
+}
+echo "</ul>";

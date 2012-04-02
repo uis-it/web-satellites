@@ -1,0 +1,56 @@
+<link href="/javascript/jquery.cleditor/jquery.cleditor.css" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/javascript/jquery.cleditor/jquery.cleditor.min.js"></script>
+<script type="text/javascript" src="/javascript/jquery.cleditor/jquery.cleditor.table.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    	$(".content").cleditor();
+   	});
+</script>
+<?php
+echo'
+	<div class="header">
+	<h2>'.$this->result->theTitle.'"'.$this->result->topicTitle.'"</h2>
+	<hr color="#E1E0DB" size="1" width="100%">';
+	if($this->theTopicType == '0')
+	echo '<a href="/forum/admin/#tabs-1">Tilbake til Dashboard </a></div>';
+	else if ($this->theTopicType == '1')
+		echo '<a href="/forum/admin/#ui-tabs-'.$this->theTopicType.'">Tilbake til Godkjente</a></div>';
+	else if ($this->theTopicType == '2')
+		echo '<a href="/forum/admin/#ui-tabs-'.$this->theTopicType.'">Tilbake til Avviste</a></div>';
+
+$i = 0;
+$count = count($this->result->commentList);
+
+while ($i < $count) {
+	$status			= $this->result->lableAcceptReject;
+	$acceptedCheck  = $this->result->extraCheckedAccepted;
+	$rejectedCheck	= $this->result->extraCheckedRejected;
+	$authorName		= $this->result->commentList[$i]['authorName'];
+	$authorEmail	= $this->result->commentList[$i]['authorEmail'];
+	$authorWeb		= $this->result->commentList[$i]['authorWeb'];
+	$title          = $this->result->commentList[$i]['title'];
+	$commentContent = $this->result->commentList[$i]['commentContent'];
+	$id 			= $this->result->commentList[$i]['id'];
+	$theTopicType 	= $this->theTopicType;
+	echo '
+	<form id="theForm" action="/forum/updatecomment" method="post" name="Form">	
+	<div class="commentDisplay">
+		<b>Status: '.$status.'</b><br />
+		<input type="radio" name="bApproved"'.$acceptedCheck.' value ="1" class="changeStatusTrigger">Godkjent
+		<input type="radio" name="bApproved"'.$rejectedCheck.' value ="0" class="changeStatusTrigger">Avvis<br />	
+<b>Authort:</b><span class="inputText" name="authorName">'.$authorName.'</span><br /> 
+<b>E-post:</b> <span class="inputText" name="email">'.$authorEmail.'</span><br /> 	
+<b>Web:	  </b> <input type="text" name="web" value="'.$authorWeb.'"><br />  
+<b>Tittel:</b> <input id="commentTitle" type="text" name= "commentTitle" value="'.$title .'"><br/>
+		<textarea cols="60" rows="20" class="content" name="content">'.$commentContent.'</textarea><br/><br/>
+		<input type="hidden" name="commentID" value="'. $id.'">
+		<input type="hidden" name="TopicType" value="'.$theTopicType.'">
+		<input type="hidden" name="theCommentType" value="'.$this->theCommentType.'">
+		<input type="hidden" name="godkjent_ID" value="'.$this->godkjent_ID.'">
+		<input class="ctsitebase-pagetop-searchbutton" type="submit" id="editTrigger" value="Gå videre"><br/><br/>
+	</div>	
+	</form>
+	<hr color="black" size="1" width="100%">';
+	$i++;
+}
+?>

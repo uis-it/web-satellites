@@ -1,0 +1,10 @@
+<?php 
+    $locale  = new Zend_Locale();
+   // $locale = new Zend_Locale(Zend_Locale::findLocale());
+    //$locale = new Zend_Locale('no_NO'); 
+    
+	
+	echo '<h2>'.$this->translate('clearCache.title',$this->locale).'</h2>';
+foreach ($this->listDirectories as $dir) {
+	echo $dir.'  <a href="/cache/delete/path/'.$dir.'">'.$this->translate('clearCache.delete').'</a><br>';
+};

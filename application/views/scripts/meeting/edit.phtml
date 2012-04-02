@@ -1,0 +1,10 @@
+<?php 
+	$this->dojo()->enable()
+		->requireModule("dijit.form.DateTextBox")
+		->requireModule("dijit._editor.plugins.TextColor")
+		->requireModule('dijit._editor.plugins.FontChoice') 
+	;
+?>
+<h2>Create a new meeting</h2>
+<p>To create a new meeting complete this form and click submit...</p>
+<?php echo $this->form; ?>

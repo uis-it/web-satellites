@@ -1,0 +1,66 @@
+<html>
+<head>
+	<?php 
+			
+		echo $this->doctype();
+		echo $this->headTitle();
+		$this->loadSkin($this->skin);
+    	echo $this->headLink();
+    	
+		$this->layout()->userForm = $this->action('index', 'user');
+	?>   
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="/javascript/jquery-1.4.2.min.js"  type="text/javascript"></script>
+	<script src="/javascript/json2.js"  type="text/javascript"></script>
+	<script src="/javascript/jquery.zend.jsonrpc.js" type="text/javascript"></script>
+	<?php 
+		foreach ($this->aJsToInclude as $jsToAdd) {
+			echo '<script src="'.$jsToAdd.'" type="text/javascript"></script>';
+		}		
+	?>	
+	
+	<?php
+		foreach ($this->aCssToInclude as $cssToAdd) {
+			echo '<link href="'.$cssToAdd.'" media="screen" rel="stylesheet" type="text/css" />';
+		}		
+	?>
+	<?php 
+		// this will include the dojo library if the view enables it.
+		if($this->dojo()->isEnabled()) {
+			$this->dojo()->setDjConfigOption('usePlainJson',true)
+	                  	->addStylesheetModule('dijit.themes.tundra')
+	                  	->setLocalPath("/externals/dojo/dojo/dojo.js")
+	        ;
+	    	echo $this->dojo();
+		}
+	?>	
+</head>
+<body class="tundra">
+    <div id="pageWrapper">
+        <div id="header">
+        	<h1>UiS WebSatellites</h1>
+        	<div id="userForm">
+            	<?php echo $this->layout()->userForm;?>
+            </div>
+        </div>
+        <div id="nav">        	
+        	<?php
+        		 
+        		echo 
+        		$this->partial('partials/display-top-menu.phtml',
+        			array(
+        				'topMenu' => $this->topMenu
+        			)
+        		); 
+        	?>            
+        </div>
+        
+        <div id="main">
+            <?php echo $this->layout()->content?>
+        </div>
+        <div id="footer">
+            <p><em>Powered by the Zend Framework</em>
+        </div>
+    </div>
+</body>
+</html>

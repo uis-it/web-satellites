@@ -1,0 +1,98 @@
+
+<script type="text/javascript">
+	$(function() {
+		$("#tabs").tabs(
+				{
+					/*ajaxOptions: {
+						error: function(xhr, status, index, anchor) {
+							$(anchor.hash).html("Couldn't load this tab. We'll try to fix this as soon as possible. If this wouldn't be a demo.");
+						}
+					}*/
+				}
+		);
+	});
+</script>
+<?php 
+echo'
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Dashboard</a></li>
+		<li><a href="/forum/accepted">Godkjente</a></li>
+		<li><a href="/forum/rejected">Avviste</a></li>
+	</ul>
+	
+	<div id="tabs-1">
+	<h2>Ny innlegg</h2>';
+
+	$count = count($this->Topics);
+	echo 'Total innlegg: '.$count.'<br>
+	<hr color="#E1E0DB" size="1" width="100%">	
+	<div class="print-article">
+	<table border="0" class="theTable">
+	<tr class="forum-list-top" >
+		<td>#</td>
+		<td width="20%">Dato</td>
+		<td width="40%"> Overskrift</td>
+		<td width="15%">Navn</td>
+		<td >Rediger og godkjenn</td>
+		';
+	 
+		$i = 0;
+		while ($i < $count) {
+			$current 	= $i + 1;
+			$overskrift = $this->Topics[$i]["overskrift"];
+			$sak 		= $this->Topics[$i]["sak"];
+			$fornavn 	= $this->Topics[$i]["fornavn"];
+			$etternavn 	= $this->Topics[$i]["etternavn"];			
+			$datetime 	= $this->Topics[$i]["dato"];
+			$datetime 	= new DateTime($datetime);
+			$datetime 	= date_format($datetime,'d.m.Y H:m');
+			echo '
+			<tr>
+				<td>'.$current.'</td>
+				<td>'.$datetime.'</td>
+				<td>'.$overskrift.'</td>
+				<td>'.$fornavn.'&nbsp;' .$etternavn.'</td>
+				<td><a href="/forum/getdashboardthread/Id/'.$this->Topics[$i]["innlegg_ID"].'"class="editTopicTrigger">Redigere</a></td>
+			</tr>';
+		 	$i++;
+		}			
+	echo' 
+	</table><br>
+	</div>
+	<div>
+	<h2>Ny kommentarer</h2>	';
+	$count = count($this->Comments);
+	echo 'Total kommentarer: '.$count.'<br>
+	<table border="0" class="theTable">
+		<tr class="forum-list-top">
+			<td>#</td>
+			<td width="80px">Dato</td>
+			<td width="30%">Overskrift</td>
+			<td width="15%">Navn</td>
+			<td width="25%">Innlegg overskrift</td>
+			<td>Rediger og godkjenn</td>
+		</tr>';		
+		$i = 0;		
+		while ($i < $count) {
+			$current  = $i + 1;
+			$datetime = $this->Comments[$i]['dateSent'];
+			$datetime = new DateTime($datetime);
+			$datetime = date_format($datetime,'d.m.Y H:m');			
+			echo '
+				<tr>
+					<td>'.$current.'</td>
+					<td>'.$datetime.'</td>
+					<td>'.$this->Comments[$i]['title'].'</td>
+					<td>'.$this->Comments[$i]['authorName'].'</td>
+					<td>'.$this->Comments[$i]['overskrift'].'</td>
+					<td>
+					<a class="editCommentsTrigger" href="/forum/editcomments/id/'.$this->Comments[$i]['fk_godkjentID'].'/topicType/0/type/9">Rediger og godkjenn</a>						
+					</td>
+				</tr>';
+			$i++;
+		}
+echo'</table>
+	</div>			
+</div> 	
+</div>';

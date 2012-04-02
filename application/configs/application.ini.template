@@ -1,0 +1,44 @@
+[production]
+phpSettings.display_startup_errors = 0
+phpSettings.display_errors = 0
+includePaths.library = APPLICATION_PATH "/../library"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+appnamespace = "Application"
+resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 0
+resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"
+resources.view[] =
+
+resources.db.adapter 				= "pdo_mysql"
+resources.db.params.host 			= "MYSQL_HOST"
+resources.db.params.username 		= "MYSQL_DB_USER"
+resources.db.params.password 		= "MYSQL_DB_PASSWORD"
+resources.db.params.dbname 			= "MYSQL_DB_NAME"
+resources.db.params.charset 		= "utf8"
+resources.db.isDefaultTableAdapter 	= true
+
+resources.frontController.defaultControllerName = "index"
+resources.frontController.plugins.acl 			= "CMS_Controller_Plugin_Acl"
+
+resources.translate.adapter 		= csv
+resources.translate.default.locale 	= "en"
+resources.translate.default.file 	= APPLICATION_PATH "/lang/source-en.csv" 
+resources.translate.translation.no 	= APPLICATION_PATH "/lang/source-no.csv"
+
+ldap.ad01.host = "LDAP_HOST_01"
+ldap.ad01.useStartTls = true
+ldap.ad01.accountDomainName = uis.no
+ldap.ad01.accountDomainNameShort = UIS
+ldap.ad01.accountCanonicalForm = 3
+ldap.ad01.baseDn = "LDAP_BASE_DN"
+ldap.ad01.memberAttr = "memberof"
+ldap.ad01.grouppattern = "LDAP_GROUP_PATTERN"
+
+cache.enable = true
+cache.basedir = "d:\\cache"
+
+;translation.enable = false
+
+[development : production]
+cache.enable = false

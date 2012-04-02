@@ -1,0 +1,145 @@
+<script type="text/javascript">
+	jQuery(function(){		
+		Meeting.init(<?php echo $this->currentMeetingID ;?>);
+		Meeting.refreshQuestionList(true);
+	});
+</script>
+
+<script id="blockQuestion" type="text/html">
+	<div>		
+		<div class="question${odd}" data="{id:${qID}}" id="question_25">
+			<div class="question-dashboard">				
+				{{if aID > 0}}
+					<span class="question-OK"> Answered by: ${fullname} </span> 
+				{{else}}
+					<span class="question-no-answer">not answered</span>
+				{{/if}}					
+			</div> 
+			<div class="question-content-wrap">
+				<div class="question-alias">${alias}  (${qDateCreated})</div>			
+				<div class="question-title">${title}</div>  
+				<div class="question-content">
+					${question}
+				</div>
+			</div>			
+		</div>		
+	</div>
+</script>
+
+<script id="blockEditQAForm" type="text/html">
+	<div id="formQA"> 		
+		<div id="question-title">
+			<label>Title: </label>
+			<input type="text" id="questionTitle" value="${qTitle}" size="74" /> 
+		</div>
+		<div id="question-content">
+			<label>Content:</label>
+			<textarea cols="70" rows="7" id="questionContent">${qContent}</textarea>
+		</div>
+		<div id="question-alias">
+			<label>Alias: ${qAlias}</label> 
+		</div>
+		<div id="question-email">
+			<label>Epost: ${qEmail}</label> 
+		</div>
+		<div id="question-date">
+			<label>Date: ${qDateCreated}</label> 
+		</div>
+		<div id="answet-content">
+			<label>Answer:</label>
+			<textarea cols="70" rows="7" id="answerContent">${answerContent}</textarea>
+		</div>		
+	</div>
+</script>
+
+<script id="blockInfo" type="text/html">	
+	<h2>Edit QA for WebMeeting: ${title}</h2>
+	<div id="meetingInfoTotals" >	
+		<b>Total questions: </b> ${totalQ}<br>
+		<b>Total questions answered: </b> ${totalQWithAnswer}<br>
+		[<b><a href="javascript:void(0);" id="welcomeEditTrigger">Welcome text</a></b>]
+		[<b><a href="javascript:void(0);" id="goodbyeEditTrigger">Goodbye text</a></b>]
+		[<b><a href="javascript:void(0);" id="statusEditTrigger">Status</a></b>]
+		[<b><a href="javascript:void(0);" id="signatureEditTrigger">Signature</a></b>]
+	</div>
+	<div id="meetingInfoContact"> 
+		<b>Contact information:</b><br>
+		${contactInfo} 
+	</div>
+</script>
+
+<script id="blockLiveMeeting" type="text/html">	
+	<div id="formStatusEdit">
+		<h2>Edit meeting status</h2>
+		<div>
+			<label>Live</label>
+			<input 
+				type="checkbox"
+				id="bIsLive"
+				{{if bIsLive == 1}}
+					checked="true"
+				{{/if}}
+			/>
+		</div>
+		<div>
+			<label>Accept questions</label>
+			<input 
+				type="checkbox"
+				id="bAcceptQuestion"
+				{{if bAcceptQuestion == 1}}
+					checked="true"
+				{{/if}}
+			/>
+		</div>
+		<div>
+			<label>Show accepted questions</label>
+			<input 
+				type="checkbox"
+				id="bTabAcceptedQuestions"
+				{{if bTabAcceptedQuestions == 1}}
+					checked="true"
+				{{/if}}
+			/>
+		</div>
+		<div>
+			<label>Show Q&A</label>
+			<input 
+				type="checkbox"
+				id="bTabAnswers"
+				{{if bTabAnswers == 1}}
+					checked="true"
+				{{/if}}
+			/>
+		</div>
+		<div>			
+			<label>Last in first out</label>
+			<input 
+				type="checkbox"
+				id="bLIFO"
+				{{if bLIFO == 1}}
+					checked="true"
+				{{/if}}
+			/>
+		</div>		
+	</div>	
+</script>
+
+
+<script id="blockEditContent" type="text/html">
+	<div id="content">
+		<label>${theElement}</label>
+		<textarea cols="70" rows="7" id="theContent">${theContent}</textarea>
+		<input type="hidden" id="theContentField" value="${theContentField}" />
+	</div>
+</script>
+
+<?php	
+	$theMeeting = $this->currentMeeting;
+	echo '
+<div id="MeetingTopInfo"></div>
+<div id="listQuestions"></div>
+<div id="theFormDialog" title="Edit question"></div>
+<div id="theLockedDialog" title="Question is locked"></div>
+<div id="theEditor" title=""></div>
+<div id="theLiveDialog" title=""></div>
+';		

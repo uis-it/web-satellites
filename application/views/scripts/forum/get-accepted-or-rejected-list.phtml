@@ -1,0 +1,74 @@
+<h2>
+	<?php 
+	echo $this->Title;
+	?>
+</h2>
+	<hr color='#E1E0DB' size='1' width='100%'>	
+	<div class='print-article'>
+	<table border=0 class="theTable">
+	<tr class='forum-list-top' >
+		<td>#</td>
+		<td width="20px" >Dato</td>
+		<td width="30%" > Overskrift</td>
+		<td width="15%" >Navn</td>
+		<td >Rediger og godkjenn</td>
+		<td >Antall besøk</td>
+		<td > Kommentarer (Ny/godtatt/avslått) </td>
+	</tr>	
+	<?php 
+		$i = 0;
+		$count = count($this->List);
+		while ($i < $count) {
+			$current 	= $i + 1;
+			$overskrift = $this->List[$i]['overskrift'];
+			$sak 		= $this->List[$i]['sak'];
+			$fornavn 	= $this->List[$i]['fornavn'];
+			$etternavn 	= $this->List[$i]['etternavn'];			
+			$datetime 	= $this->List[$i]['dato'];
+			$datetime 	= new DateTime($datetime);
+			$datetime 	= date_format($datetime,'d.m.Y H:m');
+			$theLinkComment 	= "/forum/editcomments/id/".$this->List[$i]['godkjent_ID']."/topicType/".$this->TabNr ;
+			$nrCommentsNew		= $this->List[$i]['commentsNew'];
+			$nrCommentsApproved = $this->List[$i]['commentsApproved'];
+			$nrCommentsRejected = $this->List[$i]['commentsRejected'];
+			$nrVisits	        = $this->List[$i]['visits'];
+			echo '
+			<tr>
+				<td>'.$current.'</td>
+				<td>
+					'.$datetime.'
+				</td>
+				<td>
+					'.$overskrift.'
+				</td>
+				<td>
+					'.$fornavn.'&nbsp;' .$etternavn.'
+				</td>
+				<td><a href="/forum/editthread/Id/'.$this->List[$i]['godkjent_ID'].'/Tab/'.$this->TabNr.'/"class="editTopicTrigger">Redigere</a></td>
+				<td align="center">'.$nrVisits.'</td>
+				<td align="center">';
+				if($nrCommentsNew > 0){
+					echo '<a href="'.$theLinkComment.'/type/9" class="editCommentsTrigger">
+						'.$nrCommentsNew.'</a>/';
+					}
+				else 
+					echo '0/';
+				if($nrCommentsApproved > 0){
+					echo '<a href="'.$theLinkComment.'/type/1" class="editCommentsTrigger">
+						'.$nrCommentsApproved.'</a>/';
+				}
+				else 
+					echo '0/';
+				if($nrCommentsRejected > 0){
+					echo '<a href="'.$theLinkComment.'/type/0" class="editCommentsTrigger">
+						'.$nrCommentsRejected.'</a>';
+				}
+				else 
+					echo '0
+				</td>
+			</tr>';
+		 $i++;
+		}			
+	 ?>
+	</table>
+	</div>

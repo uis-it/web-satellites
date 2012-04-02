@@ -1,0 +1,25 @@
+@CHARSET "ISO-8859-1";
+html, body {
+    margin: 0px;
+    padding: 5px;
+    font-family: Verdana, Tahoma, Arial, Sans-serif;
+    font-size: 9px;
+  
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-color: #FFFFFF;    
+    width: 1100px;
+    display: block;/*removed display: inline; because of Mozilla*/
+    color: #78745B;
+}
+.forum-list-top {
+	background-color: #aabbcc;
+	font-size: 11px;
+	height='5px';
+	color: black;
+}
+.theTable td{
+	font-size: 10px;
+	height : 5px;
+	color: black;
+}

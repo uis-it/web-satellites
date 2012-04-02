@@ -1,0 +1,56 @@
+<link href="/javascript/jquery.cleditor/jquery.cleditor.css" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/javascript/jquery.cleditor/jquery.cleditor.min.js"></script>
+<script type="text/javascript" src="/javascript/jquery.cleditor/jquery.cleditor.table.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    	$(".content").cleditor();
+   	});
+</script>
+<?php 
+echo'
+<div class="header">
+	<h2>Rediger og godkjenn</h2>
+	<hr color="#E1E0DB" size="1" width="100%">
+</div>
+
+<form id="theForm" action="/forum/updatethread" method="post" name="Form">
+<input type="hidden" name="theUrl" id="theUrl">';
+	$dato		= preg_split('/[ ]/',$this->thread[0]['dato']);
+	$overskrift = $this->thread[0]['overskrift'];
+	$fornavn	= $this->thread[0]['fornavn'];
+	$etternavn	= $this->thread[0]['etternavn'];
+	$epost 		= $this->thread[0]['epost'];
+	$webSite	= $this->thread[0]['webSite'];
+	$tittel		= $this->thread[0]['tittel'];
+	$ingress	= $this->thread[0]['ingress'];
+	$innhold	= $this->thread[0]['innhold'];
+	
+echo'
+<b>Overskrift:	</b><input type="text" id="theOverskrift" name="overskrift" value="'.$overskrift.'"><br/>
+<b>Navn:		</b><input type="text" id="theName" name="fornavn" value="'.$fornavn.'">
+		   	 	<input type="text" id="theLastName" name="etternavn"value="'.$etternavn.'"><br/>
+<b>E-post:		</b><input type="text" id="theEmail" name="epost" value="'.$epost.'" readonly="readonly"><br/>
+<b>Web:			</b><input type="text" name="webSite" value="'.$webSite.'"><br/>
+<b>Tittel:		</b><input type="text" id="theTitle" name="tittel" value="'.$tittel.'"><br/>
+<b>Dato:		</b><input type="text" name=dato1 value="'. $dato[0] .'" readonly="readonly"><br/>
+<b>Klokkeslett:	</b><input type="text" name="tid" value="'. $dato[1] .'" readonly="readonly"><br/>';
+				if (strlen($this->thread[0]['sak'])>= 1) {
+					echo $this->thread[0]['sak'].'<br/>';
+				}
+echo'	
+<b>Ingress:</b><br/> <textarea cols="40" rows="10" name="ingress">'.$ingress.'</textarea><br/>
+<b>Innhold:</b><br/> <textarea cols="40" rows="20" name="innhold" class="content">'.$innhold.'</textarea><br/>
+				<input type=hidden name="dato" value="'.$this->thread[0]['dato'].'">
+				<input type=hidden name="tab" value="'. $this->TabNr.'">
+				<input type=hidden name="godkjent_ID" value="'. $this->thread[0]['godkjent_ID'].'">
+				<input type="radio" name="godkjent" value="1"';
+				if($this->TabNr == '1')
+					echo 'checked'; 
+				echo '>Godkjent <br>
+				<input type="radio" name="godkjent" value="2"';
+				if($this->TabNr == '2')
+					echo 'checked';
+				echo '>Avvis<br><br>
+				<input class="ctsitebase-pagetop-searchbutton" type="submit" id="editTrigger" value="Gå videre">
+</form>';
+?>

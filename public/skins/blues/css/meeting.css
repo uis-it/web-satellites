@@ -1,0 +1,156 @@
+@CHARSET "ISO-8859-1";
+#meetings-list {
+	font-size: 12px;
+	font-family : "lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif
+}
+#theListTop {
+	font-weight: bold;
+}
+#theListTop div {
+	float:left;
+}
+#theListTop .listTopName {
+	width: 200px;
+}
+#theListTop .listDescription {
+	width: 200px;
+}
+#theList {
+	clear:left;
+	float:left;
+	color: #1F75CC;
+	width:700px;
+}
+
+
+.meeting-item {	
+	height: 18px;	
+	padding-left: 5px;	
+	border: 1px solid transparent;
+	margin-top: 1px;	
+}
+
+.meeting-item-selected {
+	border: 1px solid #7ad;
+	background-color: #f4faff;	
+	cursor: pointer;
+}
+.meeting-item .meeting-tile {	
+	width: 500px;	
+	float: left;
+}
+.meeting-item .meeting-description {
+	width: 200px;
+	float: left;	
+}
+.meeting-item .meeting-qa {
+	float:left;
+}
+#theMenu {
+	position:			absolute;
+	height: 			100px;
+	width: 				105px;
+	left: 				417px;
+	top: 				171px;
+	background-color: 	#f4faff; 
+	border:				1px solid #7ad;
+	background-color: 	#f4faff;
+	border-top-width: 	0px;
+}
+
+
+.question {
+	margin-top: 10px;
+	padding:	5px 1px 5px 5px;
+	cursor:		pointer;		
+}
+
+.question-content-wrap {
+	width: 	500px;	
+}
+.question-alias {
+	font-size:		14px;
+	font-weight:	bold;
+	color: 			#153680;
+}
+.question-title {
+	font-size:		12px;
+	font-weight:	bold;
+	color: 			#556b2f;
+}
+.question-content {
+	font-size:		12px;
+}
+
+.question-dashboard {
+	float: 		right;
+	border: 	1px solid #7ad;
+	padding: 	5px 5px 5px 5px;
+	margin-right: 5px;	
+}
+.question-OK {
+	color: green;
+}	
+.question-no-answer {
+	color: red;
+}
+
+.odd{
+	background-color: #F6F6F6;
+}
+.hover {
+	border: 			1px solid #7ad;
+	background-color: 	#f4faff;
+	border-width: 		1px;
+	padding: 			4px 0px 4px 4px;
+} 
+
+#formQA label {
+	float: left;
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 3px;
+	font-weight: bold;
+}
+#content label {
+	float: left;
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 3px;
+	font-weight: bold;
+} 
+
+#formStatusEdit {
+	width: 250px;
+}
+#formStatusEdit div {
+	width: 100%;
+	float: left;
+}
+#formStatusEdit div label{
+	width: 90%;
+	float: left;
+}
+#MeetingTopInfo {
+	padding:			5px 5px 5px 5px;
+	border: 			2px solid #000000; 
+	background-color: 	#EEEDE3;
+	min-height: 60px;
+}
+#MeetingTopInfo  {
+	height: 70px;
+}
+#meetingInfoContact {
+	float: left;
+	margin-left: 20px;
+}
+#meetingInfoTotals {
+	float: left;
+}
+#menuEditDiv {
+	padding-left: 10px;
+}
+#menuPanelDiv {
+	padding-left: 	10px;
+	margin-top: 	5px;
+}
